@@ -1,0 +1,128 @@
+html, body {
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	background-color: #272727;
+	color: #d8d8d8;
+}
+
+
+/* ****************
+	POMODORO CLOCK
+   **************** */
+.pomodoro {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	align-items: center;
+}
+
+.brand {
+	text-align: center;
+	font-size: 10vh;
+	margin-bottom: 5%;
+	margin-top: 3%;
+}
+
+.stage {
+	font-size: 2.5vh;
+	visibility: hidden;
+}
+
+.timer {
+	text-align: center;
+	font-size: 8vh;
+	margin-top: -15px;
+}
+
+.timer h2 {
+	margin: 0;
+}
+
+.times {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.timeLabel {
+	margin-top: 5px;
+	text-align: center;
+}
+
+.group {
+	display: flex;
+}
+
+.timeAmount {
+	font-size: 5vh;
+	text-align: center;
+	width: calc(200px + 10vw);
+}
+
+.timeButton, .timerButton {
+	background-color: #307c4f;
+	border: none;
+	color: #d8d8d8;
+	padding: 15px 32px;
+}
+
+.timerButton {
+	margin: 20px 10px 20px 10px;
+}
+
+/* **************
+	PROGRESS BAR
+   ************** */
+progress { margin-bottom: 5%; }
+
+/* remove progress default styles */
+progress, progress[role] {
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+
+	border: none;
+	background-size: auto;
+
+	width: calc(8vh + 100px);
+	height: 5px;
+}
+progress[role]:after { background-image: none; }
+progress[role] strong { display: none; }
+
+/* progress bar backgrounds */
+progress, progress[role][aria-valuenow] { background: #d8d8d8 !important; }
+progress::-webkit-progress-bar { background: #d8d8d8; }
+
+/* progress bar value color */
+progress { color: #307c4f; }
+progress::-moz-progress-bar { background: #307c4f; }
+progress::-webkit-progress-value { background: #307c4f; }
+progress[aria-valuenow]:before { background: #307c4f; }
+
+
+/* ********
+	FOOTER
+   ******** */
+footer {
+	background-color: #307c4f;
+	text-align: center;
+	color: #272727;
+}
+
+footer p { margin-top: 15px; }
+
+footer a {
+	/* color: #83cda1; */
+	color: #d8d8d8;
+	text-decoration: none;
+}
+
+
+/* 2727272 	- black */
+/* d8d8d8 	- light grey */
+/* 83cda1 	- light green */
+/* 307c4f 	- green */

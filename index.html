@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<title>Pomodoro Clock</title>
+	
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+	<div class="pomodoro">
+		<h1 class="brand">Pomodoro Clock</h1>
+		<div class="stage"><span>Focus</span></div>
+		<div class="timer"><h2 id="clockTime">00:00</h2></div>
+		<progress id="progress-bar" max="100" value="50"></progress>
+		<div id="focus-count">Banana</div>
+		<div class="times">
+			<div class="focus-container">
+				<div class="timeLabel">Focus Time</div>
+				<div class="group">
+					<button value="-f" class="timeButton">-</button>
+					<div id="focus" class="timeAmount">25 Minutes</div>
+					<button value="+f" class="timeButton">+</button>
+				</div>
+			</div>
+			<div class="rest-container">
+				<div class="timeLabel">Rest Time</div>
+				<div class="group">
+					<button value="-r" class="timeButton">-</button>
+					<div id="rest" class="timeAmount">5 Minutes</div>
+					<button value="+r" class="timeButton">+</button>
+				</div>
+			</div>
+		</div>
+		<div class="timerButtons">
+			<button id="time-start" value="start" class="timerButton">Start</button>
+			<button value="reset" class="timerButton">Reset</buttton>
+		</div>
+	</div>
+	<footer><p>Designed & Coded by <a href="https://squibs.github.io/">Zachary Holman</a></p></footer>
+	<script src="js/main.js"></script>
+</body>
+</html>
