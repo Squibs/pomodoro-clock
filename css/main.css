@@ -111,6 +111,12 @@ i {
 	margin-top: 0.5vh;
 }
 
+button:active {
+	background-color: #26623e;
+	-webkit-transform: translateY(4px);
+	transform: translateY(4px);
+}
+
 @media (min-width: 600px) {
 	.brand {
 		font-size: 10vh;
