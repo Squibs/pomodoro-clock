@@ -289,7 +289,6 @@ slider.addEventListener('change', function () {
    ********************* */
 // fix for iOS double tap zooms; prevents zoom in when pressing a button multiple times in a row
 (function () {
-
   // stores timestamp of th elast time screen was touched
   let lastTouch = 0;
 
