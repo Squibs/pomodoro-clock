@@ -21,7 +21,7 @@ html, body {
 
 .brand {
 	text-align: center;
-	font-size: 10vh;
+	font-size: 6vh;
 	margin-bottom: 5%;
 	margin-top: 3%;
 }
@@ -52,6 +52,12 @@ html, body {
 	text-align: center;
 }
 
+#focus-count {
+	font-size: 3vh;
+	margin-bottom: 10px;
+	margin-top: 5px;
+}
+
 .group {
 	display: flex;
 }
@@ -59,7 +65,7 @@ html, body {
 .timeAmount {
 	font-size: 5vh;
 	text-align: center;
-	width: calc(200px + 10vw);
+	width: calc(120px + 10vw);
 }
 
 .timeButton, .timerButton {
@@ -72,6 +78,45 @@ html, body {
 .timerButton {
 	margin: 20px 10px 20px 10px;
 }
+
+.audio-container {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 5px;
+}
+
+.slider-container {
+	display: flex;
+	align-items: center;
+}
+
+.volume-container {
+	display: flex;
+}
+
+#volume-value {
+	font-size: 4.25vh;
+	vertical-align: middle;
+	margin-right: 10px;
+	margin-top: auto;
+	margin-bottom: auto;
+	width: 8.5vh;
+}
+
+#preview {
+	margin: 10px;
+}
+
+i {
+	margin-top: 0.5vh;
+}
+
+@media (min-width: 600px) {
+	.brand {
+		font-size: 10vh;
+	}
+}
+
 
 /* **************
 	PROGRESS BAR
@@ -104,6 +149,77 @@ progress::-webkit-progress-value { background: #307c4f; }
 progress[aria-valuenow]:before { background: #307c4f; }
 
 
+/* **************
+	SLIDER STYLE
+   ************** */
+#volume-slider {
+	-webkit-appearance: none;
+	vertical-align: middle;
+	border: none;
+	padding: 0;
+	background: none;
+}
+
+#volume-slider::-webkit-slider-runnable-track {
+	background-color: #d8d8d8;
+	height: 6px;
+	border-radius: 3px;
+	border: 1px solid transparent;
+}
+
+#volume-slider::-moz-range-track {
+	background-color: #d8d8d8;
+	height: 6px;
+	border-radius: 3px;
+	border: none;
+}
+
+#volume-slider::-ms-track {
+	color: transparent;
+	border: none;
+	background: none;
+	height: 6px;
+}
+
+#volume-slider::-ms-fill-lower {
+	background-color: #d8d8d8;
+	border-radius: 3px;
+}
+
+#volume-slider::-ms-fill-upper {
+	background-color: #d8d8d8;
+	border-radius: 3px;
+}
+
+#volume-slider::-ms-tooltip { display: none; }
+
+#volume-slider::-moz-range-thumb {
+	border-radius: 20px;
+	height: 18px;
+	width: 18px;
+	border: none;
+	background: none;
+	background-color: #307c4f;
+}
+
+#volume-slider::-webkit-slider-thumb {
+	-webkit-appearance: none !important;
+	border-radius: 100%;
+	background-color: #307c4f;
+	height: 18px;
+	width: 18px;
+	margin-top: -7px;
+}
+
+#volume-slider::-ms-thumb {
+	border-radius: 100%;
+	background-color: #307c4f;
+	height: 18px;
+	width: 18px;
+	border: none;
+}
+
+
 /* ********
 	FOOTER
    ******** */
@@ -124,5 +240,4 @@ footer a {
 
 /* 2727272 	- black */
 /* d8d8d8 	- light grey */
-/* 83cda1 	- light green */
 /* 307c4f 	- green */

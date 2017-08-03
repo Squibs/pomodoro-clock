@@ -8,8 +8,10 @@ class Pomodoro {
     this.focusTime = 1500;    // stores the focus time (in seconds)
     this.restTime = 300;      // stores the rest time (in seconds)
     this.focusCount = 0;      // stores the number of times the focus timer has happened
-    this.focusAudio = new Audio('');
-    this.restAudio = new Audio('');
+
+    // audio cues for when timer state switches
+    this.focusAudio = new Audio('../media/focus.wav');
+    this.restAudio = new Audio('../media/rest.wav');
   }
 
   // formats the time into appropriate format (h:mm:ss)
@@ -188,6 +190,17 @@ class Pomodoro {
     }
   }
 
+  // adjusts the volume of the alarms (value comes from slider)
+  adjustVolume(volume) {
+    this.focusAudio.volume = (volume / 100);
+    this.restAudio.volume = (volume / 100);
+  }
+
+  // plays the focus audio clip to test volume levels when 'preview sond' button is pressed
+  volumeTest() {
+    this.focusAudio.play();
+  }
+
   // resets the pomodoro clock
   reset() {
     // clear the timer interval; set variables to defaults
@@ -214,6 +227,7 @@ pomodoro.displayCurrentTime();
 pomodoro.displayFocusTime();
 pomodoro.displayRestTime();
 pomodoro.displayFocusCount();
+pomodoro.adjustVolume(50);
 
 // handles what methods get called depending on which button is pressed
 const buttonListener = function () {
@@ -237,6 +251,9 @@ const buttonListener = function () {
     case 'reset':
       pomodoro.reset();
       break;
+    case 'sound':
+      pomodoro.volumeTest();
+      break;
     default:
       break;
   }
@@ -249,3 +266,19 @@ const buttons = document.getElementsByTagName('button');
 for (let i = 0; i < buttons.length; i += 1) {
   buttons.item(i).addEventListener('click', buttonListener);
 }
+
+// stores slider related DOM elements
+const slider = document.getElementById('volume-slider');
+const sliderValue = document.getElementById('volume-value');
+
+// adjusts volume instantly when slider is moved
+slider.addEventListener('input', function () {
+  sliderValue.innerText = `${this.value}%`;
+  pomodoro.adjustVolume(this.value);
+});
+
+// support for older browsers; adjusts volume when slider is released
+slider.addEventListener('change', function () {
+  sliderValue.innerText = `${this.value}%`;
+  pomodoro.adjustVolume(this.value);
+});

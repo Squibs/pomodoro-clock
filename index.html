@@ -8,14 +8,14 @@
 	<title>Pomodoro Clock</title>
 	
 	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 	<div class="pomodoro">
 		<h1 class="brand">Pomodoro Clock</h1>
-		<div class="stage"><span>Focus</span></div>
-		<div class="timer"><h2 id="clockTime">00:00</h2></div>
+		<div class="timer"><h2 id="clockTime">25:00</h2></div>
 		<progress id="progress-bar" max="100" value="50"></progress>
-		<div id="focus-count">Banana</div>
+		<div id="focus-count">Adjust your focus and rest times below!</div>
 		<div class="times">
 			<div class="focus-container">
 				<div class="timeLabel">Focus Time</div>
@@ -37,6 +37,16 @@
 		<div class="timerButtons">
 			<button id="time-start" value="start" class="timerButton">Start</button>
 			<button value="reset" class="timerButton">Reset</buttton>
+		</div>
+		<div class="audio-container">
+			<div class="slider-container">
+				<div class="volume-container">
+					<div class="volume-icon"><i class="fa fa-volume-up fa-3x">&nbsp;</i></div>
+					<div id="volume-value">50%</div>
+				</div>
+				<input id="volume-slider" type="range" min="0" max="100" value="50" autocomplete="off"/>
+			</div>
+			<button id="preview" class="timerButton" value="sound">Preview Sound</button>
 		</div>
 	</div>
 	<footer><p>Designed & Coded by <a href="https://squibs.github.io/">Zachary Holman</a></p></footer>
