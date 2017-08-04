@@ -220,7 +220,6 @@ class Pomodoro {
 
 // creates a pomodoro class object
 const pomodoro = new Pomodoro();
-console.log(pomodoro);
 
 // replace placeholder DOM values
 pomodoro.displayCurrentTime();
@@ -231,7 +230,6 @@ pomodoro.adjustVolume(50);
 
 // handles what methods get called depending on which button is pressed
 const buttonListener = function () {
-  console.log('click');
   switch (this.value) {
     case '-f':
       pomodoro.changeFocusTime('subtract');
