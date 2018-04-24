@@ -13,30 +13,30 @@
 <body ontouchstart="">
 	<div class="pomodoro">
 		<h1 class="brand">Pomodoro Clock</h1>
-		<div class="timer"><h2 id="clockTime">25:00</h2></div>
+		<div class="timer"><h2 id="time-left">25:00</h2></div>
 		<progress id="progress-bar" max="100" value="50"></progress>
-		<div id="focus-count">Adjust your focus and rest times below!</div>
+		<div id="timer-label">Adjust your focus and rest times below!</div>
 		<div class="times">
 			<div class="focus-container">
-				<div class="timeLabel">Focus Time</div>
+				<div id="session-label" class="timeLabel">Focus Time</div>
 				<div class="group">
-					<button value="-f" class="timeButton">-</button>
-					<div id="focus" class="timeAmount">25 Minutes</div>
-					<button value="+f" class="timeButton">+</button>
+					<button id="session-decrement" value="-f" class="timeButton">-</button>
+					<div id="session-length" class="timeAmount">25 min</div>
+					<button id="session-increment" value="+f" class="timeButton">+</button>
 				</div>
 			</div>
 			<div class="rest-container">
-				<div class="timeLabel">Rest Time</div>
+				<div id="break-label" class="timeLabel">Rest Time</div>
 				<div class="group">
-					<button value="-r" class="timeButton">-</button>
-					<div id="rest" class="timeAmount">5 Minutes</div>
-					<button value="+r" class="timeButton">+</button>
+					<button id="break-decrement" value="-r" class="timeButton">-</button>
+					<div id="break-length" class="timeAmount">5</div>
+					<button id="break-increment" value="+r" class="timeButton">+</button>
 				</div>
 			</div>
 		</div>
 		<div class="timerButtons">
-			<button id="time-start" value="start" class="timerButton">Start</button>
-			<button value="reset" class="timerButton">Reset</buttton>
+			<button id="start_stop" value="start" class="timerButton">Start</button>
+			<button id="reset" value="reset" class="timerButton">Reset</button>
 		</div>
 		<div class="audio-container">
 			<div class="slider-container">
@@ -50,6 +50,9 @@
 		</div>
 	</div>
 	<footer><p>Designed & Coded by <a href="https://squibs.github.io/">Zachary Holman</a></p></footer>
+	<audio id="beep" preload="auto" src="media/rest.wav" />
+	<audio id="beep2" preload="auto" src="media/focus.wav" />
 	<script src="js/main.js"></script>
+	<script src="https://gitcdn.link/repo/freeCodeCamp/testable-projects-fcc/master/build/bundle.js"></script>
 </body>
 </html>

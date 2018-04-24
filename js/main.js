@@ -10,15 +10,15 @@ class Pomodoro {
     this.focusCount = 0;      // stores the number of times the focus timer has happened
 
     // audio cues for when timer state switches
-    this.focusAudio = new Audio('../media/focus.wav');
-    this.restAudio = new Audio('../media/rest.wav');
+    this.restAudio = document.getElementById('beep');
+    this.focusAudio = document.getElementById('beep2');
   }
 
   // formats the time into appropriate format (h:mm:ss)
   static formatTime(secs) {
     let result = '';
-    const seconds = secs % 60;
-    const minutes = parseInt(secs / 60, 10) % 60;
+    const seconds = parseInt(secs % 60, 10);
+    const minutes = secs === 3600 ? 0 : parseInt((secs / 60), 10);
     const hours = parseInt(secs / 3600, 10);
 
     // adds the leading '0' for minutes and seconds (hh:mm)
@@ -29,6 +29,8 @@ class Pomodoro {
     // if there is an hour add that first otherwise add minutes and seconds with leading zeroes
     if (hours > 0) result += `${hours}:`;
     result += `${addLeadingZeroes(minutes)}:${addLeadingZeroes(seconds)}`;
+
+    // console.log(secs, hours, minutes, seconds, result);
     return result;
   }
 
@@ -38,11 +40,18 @@ class Pomodoro {
     if (this.active === false) {
       this.reset();
 
-      // if the passed string is 'add' add a minute; if over 60 reset to 1 by subtracting 60
+      // if the passed string is 'add' add a minute; else subtract a minute if above 1 minute
       if (str === 'add') {
         this.focusTime += 60;
-      } else if (this.focusTime > 60) {
+      } else {
         this.focusTime -= 60;
+      }
+
+      // if above 60 minutes, reset to 1 minute
+      if (this.focusTime > 3600) {
+        this.focusTime = 3600;
+      } else if (this.focusTime <= 0) {
+        this.focusTime = 60;
       }
 
       // set current and start times to the focusTime (length)
@@ -61,11 +70,18 @@ class Pomodoro {
     if (this.active === false) {
       this.reset();
 
-      // if the passed string is 'add' add a minute; if over 60 reset to 1 by subtracting 60
+      // if the passed string is 'add' add a minute; else subtract a minute if above 1 minute
       if (str === 'add') {
         this.restTime += 60;
-      } else if (this.restTime > 60) {
+      } else {
         this.restTime -= 60;
+      }
+
+      // if above 60 minutes, reset to 1 minute
+      if (this.restTime > 3600) {
+        this.restTime = 3600;
+      } else if (this.restTime <= 0) {
+        this.restTime = 60;
       }
 
       // display the restTime
@@ -76,7 +92,7 @@ class Pomodoro {
   // displays the current time on the DOM
   displayCurrentTime() {
     // format the time and display it in DOM
-    document.getElementById('clockTime').innerText = Pomodoro.formatTime(this.currentTime);
+    document.getElementById('time-left').innerText = Pomodoro.formatTime(this.currentTime);
 
     // stores the progress bar element
     const progressBar = document.getElementById('progress-bar');
@@ -93,24 +109,24 @@ class Pomodoro {
       progressBar.classList.add('rest');
     }
 
-    // change the current value of the progres bar coincide with the time remaining
+    // change the current value of the progress bar coincide with the time remaining
     progressBar.setAttribute('value', 100 - parseInt((this.currentTime / this.startTime) * 100, 10));
   }
 
   // displays the focus time (how long the focus sessions will last) on the DOM
   displayFocusTime() {
-    document.getElementById('focus').innerText = `${parseInt(this.focusTime / 60, 10)} min`;
+    document.getElementById('session-length').innerText = `${parseInt(this.focusTime / 60, 10)}`;
   }
 
   // displays the rest time (how long the rest sessions will last) on the DOM
   displayRestTime() {
-    document.getElementById('rest').innerText = `${parseInt(this.restTime / 60, 10)} min`;
+    document.getElementById('break-length').innerText = `${parseInt(this.restTime / 60, 10)}`;
   }
 
   // displays current iteration number for the focus timer
   displayFocusCount() {
     // stores the focus count DOM element
-    const count = document.getElementById('focus-count');
+    const count = document.getElementById('timer-label');
 
     // if the focus count is 0 display the instructions
     if (this.focusCount === 0) {
@@ -127,7 +143,7 @@ class Pomodoro {
   // allows for the timer to be paused
   toggleTimer() {
     // stores the start / pause button element from DOM
-    const timerButton = document.getElementById('time-start');
+    const timerButton = document.getElementById('start_stop');
 
     // if the timer is active
     if (this.active === true) {
@@ -145,48 +161,51 @@ class Pomodoro {
         // display the focusCount as one and play audio
         this.focusCount = 1;
         this.displayFocusCount();
-        this.focusAudio.play();
       }
-
-      // creates a timer with intervals of 1 second and calls stepDown() every interval
-      this.timer = setInterval(() => {
-        this.stepDown();
-      }, 1000);
-
       // change timer active state
       this.active = true;
+
+      this.startTimer();
     }
   }
 
-  // handles time operations; happens on every interval
-  stepDown() {
-    // if the current time is greater than 0
-    if (this.currentTime > 0) {
-      // subtract one from the current time and the updated time
+  startTimer() {
+    // creates a timer with intervals of 1 second and calls stepDown() every interval
+    this.timer = setInterval(() => {
       this.currentTime -= 1;
+      this.testIfZero();
       this.displayCurrentTime();
+      // console.log(document.getElementById('time-left').innerText);
+    }, 30);
+  }
 
-      if (this.currentTime === 0) {
-        // if the current time is 0 and the timer type is 'focus'
-        if (this.type === 'focus') {
-          // update times to the specified rest time; change type to rest; and play an audio cue
-          this.currentTime = this.restTime;
-          this.startTime = this.restTime;
-          this.type = 'rest';
-          this.displayFocusCount();
-          this.restAudio.play();
-        // if the current time is 0 and the timer type is 'rest'
-        } else {
-          // update times to the specified focus time; change type to focus; and play an audio cue
-          // add one to the focus iteration count
-          this.focusCount += 1;
-          this.currentTime = this.focusTime;
-          this.startTime = this.focusTime;
-          this.type = 'focus';
-          this.displayFocusCount();
-          this.focusAudio.play();
-        }
+  testIfZero() {
+    if (this.currentTime < 0) {
+      // if the current time is below 0 and the timer type is 'focus'
+      this.displayCurrentTime();
+      clearInterval(this.timer);
+
+      if (this.type === 'focus') {
+        // update times to the specified rest time; change type to rest; and play an audio cue
+        this.currentTime = this.restTime;
+        this.startTime = this.restTime;
+        this.type = 'rest';
+        this.displayFocusCount();
+        this.restAudio.play();
+
+      // if the current time is 0 and the timer type is 'rest'
+      } else {
+        // update times to the specified focus time; change type to focus; and play an audio cue
+        // add one to the focus iteration count
+        this.focusCount += 1;
+        this.currentTime = this.focusTime;
+        this.startTime = this.focusTime;
+        this.type = 'focus';
+        this.displayFocusCount();
+        this.focusAudio.play();
       }
+
+      this.startTimer();
     }
   }
 
@@ -196,7 +215,7 @@ class Pomodoro {
     this.restAudio.volume = (volume / 100);
   }
 
-  // plays the focus audio clip to test volume levels when 'preview sond' button is pressed
+  // plays the focus audio clip to test volume levels when 'preview sound' button is pressed
   volumeTest() {
     this.focusAudio.play();
   }
@@ -205,16 +224,49 @@ class Pomodoro {
   reset() {
     // clear the timer interval; set variables to defaults
     clearInterval(this.timer);
+    this.timer = 'timer';
     this.active = false;
     this.type = 'focus';
     this.currentTime = this.focusTime;
     this.focusCount = 0;
 
+    // reset audio
+    this.restAudio.pause();
+    this.focusAudio.pause();
+    this.restAudio.currentTime = 0;
+    this.focusAudio.currentTime = 0;
+
     // change start button text; display now default times
-    document.getElementById('time-start').innerText = 'Start';
+    document.getElementById('start_stop').innerText = 'Start';
     this.displayCurrentTime();
     this.displayFocusTime();
     this.displayFocusCount();
+  }
+
+  // reset everything to default
+  hardReset() {
+    clearInterval(this.timer);
+    this.timer = 'timer';
+    this.active = false;
+    this.type = 'focus';
+    this.startTime = 1500;
+    this.currentTime = 1500;
+    this.focusTime = 1500;
+    this.restTime = 300;
+    this.focusCount = 0;
+
+    // reset audio
+    this.restAudio.pause();
+    this.focusAudio.pause();
+    this.restAudio.currentTime = 0;
+    this.focusAudio.currentTime = 0;
+
+    // change start button text; display now default times
+    document.getElementById('start_stop').innerText = 'Start';
+    this.displayCurrentTime();
+    this.displayFocusTime();
+    this.displayFocusCount();
+    this.displayRestTime();
   }
 }
 
@@ -247,7 +299,7 @@ const buttonListener = function () {
       pomodoro.toggleTimer();
       break;
     case 'reset':
-      pomodoro.reset();
+      pomodoro.hardReset();
       break;
     case 'sound':
       pomodoro.volumeTest();
@@ -287,7 +339,7 @@ slider.addEventListener('change', function () {
    ********************* */
 // fix for iOS double tap zooms; prevents zoom in when pressing a button multiple times in a row
 (function () {
-  // stores timestamp of th elast time screen was touched
+  // stores timestamp of the last time screen was touched
   let lastTouch = 0;
 
   // resets lastTouch timestamp
