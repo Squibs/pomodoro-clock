@@ -1,7 +1,7 @@
 # Pomodoro Clock
-A pomodoro clock. Created while going through the advanced front end development projects at https://freeCodeCamp.com
+A pomodoro clock. Created while going through the advanced front end development projects at www.freeCodeCamp.org
 
-## [Front End Development Projects](https://github.com/Squibs/freeCodeCamp/tree/master/Front%20End%20Development%20Certification#pomodoro-clock) (Go Back)
+## [Front End Development Projects](https://github.com/Squibs/freeCodeCamp#freecodecamp) (Go Back to My freeCodeCamp Repository)
 
 <a href="https://squibs.github.io/pomodoro-clock/" target="_blank"><img src="img/screenshot-pomodoro-clock.png" height="600" alt="Screenshot of my Pomodoro Clock project / website"/></a>
 
