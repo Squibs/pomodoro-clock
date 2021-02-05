@@ -1,13 +1,13 @@
 class Pomodoro {
   constructor() {
-    this.timer = 'timer';     // will store setInterval() to keep track of time
-    this.active = false;      // controls whether or not the timer is running
-    this.type = 'focus';      // current state of timer 'focus' or 'rest'
-    this.startTime = 1500;    // initial / starting value of the timer (in seconds)
-    this.currentTime = 1500;  // current time on the timer (counts down; in seconds)
-    this.focusTime = 1500;    // stores the focus time (in seconds)
-    this.restTime = 300;      // stores the rest time (in seconds)
-    this.focusCount = 0;      // stores the number of times the focus timer has happened
+    this.timer = 'timer'; // will store setInterval() to keep track of time
+    this.active = false; // controls whether or not the timer is running
+    this.type = 'focus'; // current state of timer 'focus' or 'rest'
+    this.startTime = 1500; // initial / starting value of the timer (in seconds)
+    this.currentTime = 1500; // current time on the timer (counts down; in seconds)
+    this.focusTime = 1500; // stores the focus time (in seconds)
+    this.restTime = 300; // stores the rest time (in seconds)
+    this.focusCount = 0; // stores the number of times the focus timer has happened
 
     // audio cues for when timer state switches
     this.restAudio = document.getElementById('beep');
@@ -110,7 +110,10 @@ class Pomodoro {
     }
 
     // change the current value of the progress bar coincide with the time remaining
-    progressBar.setAttribute('value', 100 - parseInt((this.currentTime / this.startTime) * 100, 10));
+    progressBar.setAttribute(
+      'value',
+      100 - parseInt((this.currentTime / this.startTime) * 100, 10),
+    );
   }
 
   // displays the focus time (how long the focus sessions will last) on the DOM
@@ -176,7 +179,7 @@ class Pomodoro {
       this.testIfZero();
       this.displayCurrentTime();
       // console.log(document.getElementById('time-left').innerText);
-    }, 30);
+    }, 1000);
   }
 
   testIfZero() {
