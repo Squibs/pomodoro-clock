@@ -1,253 +1,280 @@
-html, body {
-	margin: 0;
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
-	background-color: #272727;
-	color: #d8d8d8;
+html,
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #272727;
+  color: #d8d8d8;
 }
 
 /* fix to re-add 'min' after focus/rest settings */
-#break-length::after, #session-length::after {
-	content: ' min';
+#break-length::after,
+#session-length::after {
+  content: ' min';
 }
 
-
 /* ****************
-	 POMODORO CLOCK
+   POMODORO CLOCK
    **************** */
 .pomodoro {
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	align-content: center;
-	align-items: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
 }
 
 .brand {
-	text-align: center;
-	font-size: 6vh;
-	margin-bottom: 5%;
-	margin-top: 3%;
+  text-align: center;
+  font-size: 6vh;
+  margin-bottom: 5%;
+  margin-top: 3%;
 }
 
 .stage {
-	font-size: 2.5vh;
-	visibility: hidden;
+  font-size: 2.5vh;
+  visibility: hidden;
 }
 
 .timer {
-	text-align: center;
-	font-size: 8vh;
-	margin-top: -15px;
+  text-align: center;
+  font-size: 8vh;
+  margin-top: -15px;
 }
 
 .timer h2 {
-	margin: 0;
+  margin: 0;
 }
 
 .times {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .timeLabel {
-	margin-top: 5px;
-	text-align: center;
+  margin-top: 5px;
+  text-align: center;
 }
 
 #timer-label {
-	font-size: 3vh;
-	margin-bottom: 10px;
-	margin-top: 5px;
+  font-size: 3vh;
+  margin-bottom: 10px;
+  margin-top: 5px;
+  text-align: center;
 }
 
 .group {
-	display: flex;
+  display: flex;
 }
 
 .timeAmount {
-	font-size: 5vh;
-	text-align: center;
-	width: calc(120px + 10vw);
+  font-size: 5vh;
+  text-align: center;
+  width: calc(120px + 10vw);
 }
 
-.timeButton, .timerButton {
-	background-color: #307c4f;
-	border: none;
-	color: #d8d8d8;
-	padding: 15px 32px;
+.timerButtons {
+  text-align: center;
+}
+
+.timeButton,
+.timerButton {
+  background-color: #307c4f;
+  border: none;
+  color: #d8d8d8;
+  padding: 15px 32px;
 }
 
 .timerButton {
-	margin: 20px 10px 20px 10px;
+  margin: 20px 10px 20px 10px;
 }
 
 .audio-container {
-	display: flex;
-	flex-direction: column;
-	margin-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
 }
 
 .slider-container {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .volume-container {
-	display: flex;
+  display: flex;
 }
 
 #volume-value {
-	font-size: 4.25vh;
-	vertical-align: middle;
-	margin-right: 10px;
-	margin-top: auto;
-	margin-bottom: auto;
-	width: 8.5vh;
+  font-size: 4.25vh;
+  vertical-align: middle;
+  margin-right: 10px;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 8.5vh;
 }
 
 #preview {
-	margin: 10px;
+  margin: 10px;
 }
 
 i {
-	margin-top: 0.5vh;
+  margin-top: 0.5vh;
 }
 
 button:active {
-	background-color: #26623e;
-	-webkit-transform: translateY(4px);
-	transform: translateY(4px);
+  background-color: #26623e;
+  -webkit-transform: translateY(4px);
+  transform: translateY(4px);
 }
 
 @media (min-width: 600px) {
-	.brand {
-		font-size: 10vh;
-	}
+  .brand {
+    font-size: 10vh;
+  }
 }
 
-
 /* **************
-	 PROGRESS BAR
+   PROGRESS BAR
    ************** */
-progress { margin-bottom: 5%; }
+progress {
+  margin-bottom: 5%;
+}
 
 /* remove progress default styles */
-progress, progress[role] {
-	appearance: none;
-	-moz-appearance: none;
-	-webkit-appearance: none;
+progress,
+progress[role] {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
 
-	border: none;
-	background-size: auto;
+  border: none;
+  background-size: auto;
 
-	width: calc(8vh + 100px);
-	height: 5px;
+  width: calc(8vh + 100px);
+  height: 5px;
 }
-progress[role]:after { background-image: none; }
-progress[role] strong { display: none; }
+progress[role]:after {
+  background-image: none;
+}
+progress[role] strong {
+  display: none;
+}
 
 /* progress bar backgrounds */
-progress, progress[role][aria-valuenow] { background: #d8d8d8 !important; }
-progress::-webkit-progress-bar { background: #d8d8d8; }
+progress,
+progress[role][aria-valuenow] {
+  background: #d8d8d8 !important;
+}
+progress::-webkit-progress-bar {
+  background: #d8d8d8;
+}
 
 /* progress bar value color */
-progress { color: #307c4f; }
-progress::-moz-progress-bar { background: #307c4f; }
-progress::-webkit-progress-value { background: #307c4f; }
-progress[aria-valuenow]:before { background: #307c4f; }
-
+progress {
+  color: #307c4f;
+}
+progress::-moz-progress-bar {
+  background: #307c4f;
+}
+progress::-webkit-progress-value {
+  background: #307c4f;
+}
+progress[aria-valuenow]:before {
+  background: #307c4f;
+}
 
 /* **************
-	 SLIDER STYLE
+   SLIDER STYLE
    ************** */
 #volume-slider {
-	-webkit-appearance: none;
-	vertical-align: middle;
-	border: none;
-	padding: 0;
-	background: none;
+  -webkit-appearance: none;
+  vertical-align: middle;
+  border: none;
+  padding: 0;
+  background: none;
 }
 
 #volume-slider::-webkit-slider-runnable-track {
-	background-color: #d8d8d8;
-	height: 6px;
-	border-radius: 3px;
-	border: 1px solid transparent;
+  background-color: #d8d8d8;
+  height: 6px;
+  border-radius: 3px;
+  border: 1px solid transparent;
 }
 
 #volume-slider::-moz-range-track {
-	background-color: #d8d8d8;
-	height: 6px;
-	border-radius: 3px;
-	border: none;
+  background-color: #d8d8d8;
+  height: 6px;
+  border-radius: 3px;
+  border: none;
 }
 
 #volume-slider::-ms-track {
-	color: transparent;
-	border: none;
-	background: none;
-	height: 6px;
+  color: transparent;
+  border: none;
+  background: none;
+  height: 6px;
 }
 
 #volume-slider::-ms-fill-lower {
-	background-color: #d8d8d8;
-	border-radius: 3px;
+  background-color: #d8d8d8;
+  border-radius: 3px;
 }
 
 #volume-slider::-ms-fill-upper {
-	background-color: #d8d8d8;
-	border-radius: 3px;
+  background-color: #d8d8d8;
+  border-radius: 3px;
 }
 
-#volume-slider::-ms-tooltip { display: none; }
+#volume-slider::-ms-tooltip {
+  display: none;
+}
 
 #volume-slider::-moz-range-thumb {
-	border-radius: 20px;
-	height: 18px;
-	width: 18px;
-	border: none;
-	background: none;
-	background-color: #307c4f;
+  border-radius: 20px;
+  height: 18px;
+  width: 18px;
+  border: none;
+  background: none;
+  background-color: #307c4f;
 }
 
 #volume-slider::-webkit-slider-thumb {
-	-webkit-appearance: none !important;
-	border-radius: 100%;
-	background-color: #307c4f;
-	height: 18px;
-	width: 18px;
-	margin-top: -7px;
+  -webkit-appearance: none !important;
+  border-radius: 100%;
+  background-color: #307c4f;
+  height: 18px;
+  width: 18px;
+  margin-top: -7px;
 }
 
 #volume-slider::-ms-thumb {
-	border-radius: 100%;
-	background-color: #307c4f;
-	height: 18px;
-	width: 18px;
-	border: none;
+  border-radius: 100%;
+  background-color: #307c4f;
+  height: 18px;
+  width: 18px;
+  border: none;
 }
-
 
 /* ********
-	 FOOTER
+   FOOTER
    ******** */
 footer {
-	background-color: #307c4f;
-	text-align: center;
-	color: #272727;
+  background-color: #307c4f;
+  text-align: center;
+  color: #272727;
 }
 
-footer p { margin-top: 15px; }
+footer p {
+  margin-top: 15px;
+}
 
 footer a {
-	/* color: #83cda1; */
-	color: #d8d8d8;
-	text-decoration: none;
+  /* color: #83cda1; */
+  color: #d8d8d8;
+  text-decoration: none;
 }
-
 
 /* 2727272 	- black */
 /* d8d8d8 	- light grey */
