@@ -6,6 +6,8 @@ body {
   min-height: 100vh;
   background-color: #272727;
   color: #d8d8d8;
+  width: 100%;
+  min-width: 300px;
 }
 
 /* fix to re-add 'min' after focus/rest settings */
